@@ -2,15 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using Zenject;
 
-// Чекпоинт
+// Checkpoint
 //
 public class Checkpoint : MonoBehaviour
 {
     public int checkpointNumber;
 
-    public CheckpointManager checkpointManager;
-    public bool checkpointPassed;
+    [Inject] private CheckpointManager checkpointManager;
+    public bool checkpointPassed; 
 
     void Start()
     {
@@ -22,8 +23,14 @@ public class Checkpoint : MonoBehaviour
         if (player.gameObject.tag == "Player" && !checkpointPassed)
         {
             Debug.Log("Checkpoint passed");
-            //checkpointManager.OnEnterCheckpoint(checkpointNumber);
+            checkpointManager.OnEnterCheckpoint(checkpointNumber);
         }
+    }
+
+    public void CheckpointPassed()
+    {
+        checkpointPassed = true;
+        Debug.Log($"{checkpointNumber} done");
     }
 
     public void Delete()

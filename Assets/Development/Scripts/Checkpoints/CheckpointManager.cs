@@ -2,11 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// �������� ����������
+// Checkpoint Manager
 //
 public class CheckpointManager : MonoBehaviour
 {
     public List<Checkpoint> allCheckpoints;
+
+    void Start()
+    {
+        if (allCheckpoints == null || allCheckpoints.Count == 0)
+        {
+            allCheckpoints = new List<Checkpoint>();
+        }
+    }
 
     public void OnEnterCheckpoint(int checkpoint)
     {
@@ -22,7 +30,7 @@ public class CheckpointManager : MonoBehaviour
 
     public void DoneCheckpoint(int checkpoint)
     {
-        allCheckpoints[checkpoint].checkpointPassed = true;
+        allCheckpoints[checkpoint].CheckpointPassed();
     }
 
     public void AddCheckpoint(Checkpoint checkpoint)
