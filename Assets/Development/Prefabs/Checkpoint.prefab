@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 2555197670307631992}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4, y: 1.75, z: 0}
+  m_LocalPosition: {x: -2, y: 1.75, z: 0}
   m_LocalScale: {x: 0.2, y: 3.5, z: 0.2}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -133,7 +133,7 @@ Transform:
   m_GameObject: {fileID: 8072651430859233553}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.75, z: 0}
+  m_LocalPosition: {x: 2, y: 1.75, z: 0}
   m_LocalScale: {x: 0.2, y: 3.5, z: 0.2}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -258,7 +258,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   checkpointNumber: 0
-  checkpointManager: {fileID: 0}
   checkpointPassed: 0
 --- !u!65 &1887278936482123281
 BoxCollider:
