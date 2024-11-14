@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// Менеджер чекпоинтов
+// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 //
 public class CheckpointManager : MonoBehaviour
 {
@@ -13,10 +13,10 @@ public class CheckpointManager : MonoBehaviour
         if (checkpoint == 0 || allCheckpoints[checkpoint - 1].checkpointPassed) 
         {
             DoneCheckpoint(checkpoint);
-        }
-        if (checkpoint ==  allCheckpoints.Count - 1)
-        {
-            Finish();
+            if (checkpoint == allCheckpoints.Count - 1)
+            {
+                Finish();
+            }
         }
     }
 

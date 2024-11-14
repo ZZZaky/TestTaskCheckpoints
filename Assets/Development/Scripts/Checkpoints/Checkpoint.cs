@@ -21,7 +21,8 @@ public class Checkpoint : MonoBehaviour
     {
         if (player.gameObject.tag == "Player" && !checkpointPassed)
         {
-            checkpointManager.OnEnterCheckpoint(checkpointNumber);
+            Debug.Log("Checkpoint passed");
+            //checkpointManager.OnEnterCheckpoint(checkpointNumber);
         }
     }
 
