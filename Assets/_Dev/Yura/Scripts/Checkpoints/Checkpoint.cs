@@ -4,23 +4,25 @@ using Unity.VisualScripting;
 using UnityEngine;
 using Zenject;
 
-// Checkpoint
-//
+
+/// <summary>
+/// Checkpoint handler
+/// </summary>
 public class Checkpoint : MonoBehaviour
 {
     public int checkpointNumber;
 
     [Inject] private CheckpointManager checkpointManager;
-    public bool checkpointPassed; 
+    public bool isPassed; 
 
     void Start()
     {
-        checkpointPassed = false;
+        isPassed = false;
     }
 
     public void OnTriggerEnter(Collider player)
     {
-        if (player.gameObject.tag == "Player" && !checkpointPassed)
+        if (player.gameObject.tag == "Player" && !isPassed)
         {
             Debug.Log("Checkpoint passed");
             checkpointManager.OnEnterCheckpoint(checkpointNumber);
@@ -29,7 +31,7 @@ public class Checkpoint : MonoBehaviour
 
     public void CheckpointPassed()
     {
-        checkpointPassed = true;
+        isPassed = true;
         Debug.Log($"{checkpointNumber} done");
     }
 

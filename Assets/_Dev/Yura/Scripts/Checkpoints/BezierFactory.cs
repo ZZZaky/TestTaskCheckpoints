@@ -4,6 +4,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Creator of all Bezier curves
+/// </summary>
 public class BezierFactory : MonoBehaviour
 {
     public BezierSpline spline;
@@ -15,7 +18,6 @@ public class BezierFactory : MonoBehaviour
 
     public void CreatePoints(List<Vector3> points)
     {
-        Debug.Log("Creating points...");
         spline.Initialize(points.Count);
         for (int i = 0; i < points.Count; i++)
         {

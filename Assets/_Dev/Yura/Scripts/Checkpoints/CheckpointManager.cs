@@ -3,8 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// Checkpoint Manager
-//
+/// <summary>
+/// Manager for all checkpoints present
+/// </summary>
 public class CheckpointManager : MonoBehaviour
 {
     public List<Checkpoint> allCheckpoints;
@@ -21,8 +22,7 @@ public class CheckpointManager : MonoBehaviour
             Debug.Log(allCheckpoints.Count);
             List<Vector3> points = new List<Vector3>();
             foreach (var checkpoint in allCheckpoints) 
-            { 
-                Debug.Log(checkpoint.transform.position);
+            {
                 points.Add(checkpoint.transform.position);
             }
             bezierFactory.CreatePoints(points);
@@ -31,12 +31,12 @@ public class CheckpointManager : MonoBehaviour
 
     public void OnEnterCheckpoint(int checkpoint)
     {
-        if (checkpoint == 0 || allCheckpoints[checkpoint - 1].checkpointPassed) 
+        if (checkpoint == 0 || allCheckpoints[checkpoint - 1].isPassed) 
         {
             DoneCheckpoint(checkpoint);
             if (checkpoint == allCheckpoints.Count - 1)
             {
-                Finish();
+                OnFinish();
             }
         }
     }
@@ -65,7 +65,7 @@ public class CheckpointManager : MonoBehaviour
         allCheckpoints = new List<Checkpoint>();
     }
 
-    private void Finish()
+    private void OnFinish()
     {
         // TODO
     }

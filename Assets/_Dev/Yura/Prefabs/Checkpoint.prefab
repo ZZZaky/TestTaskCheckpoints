@@ -62,7 +62,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 748c0cafc379ab8448cbc50e109768d6, type: 2}
+  - {fileID: 2100000, guid: 02fd4421ed5901c44b268d04be6c5ff9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -167,7 +167,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 748c0cafc379ab8448cbc50e109768d6, type: 2}
+  - {fileID: 2100000, guid: 02fd4421ed5901c44b268d04be6c5ff9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -257,7 +257,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7a1a78de3d4e114d985a62a65c2b2c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  checkpointNumber: 0
+  checkpointNumber: 3
   checkpointPassed: 0
 --- !u!65 &1887278936482123281
 BoxCollider:
