@@ -29,10 +29,8 @@ public class BezierFactory : MonoBehaviour
 
     public void AddPoint(Vector3 point)
     {
-        Debug.Log($"Checkpoints: {spline.Count}");
         spline.InsertNewPointAt(spline.Count);
         spline[spline.Count - 1].position = point;
-        Debug.Log($"Checkpoints: {spline.Count}");
     }
 
     public void UpdateBezierSplines()
