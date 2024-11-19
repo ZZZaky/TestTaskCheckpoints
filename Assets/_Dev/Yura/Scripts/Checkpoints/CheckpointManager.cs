@@ -2,6 +2,7 @@ using BezierSolution;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 /// <summary>
 /// Manager for all checkpoints present
@@ -9,7 +10,10 @@ using UnityEngine;
 public class CheckpointManager : MonoBehaviour
 {
     public List<Checkpoint> allCheckpoints;
-    public BezierFactory bezierFactory;
+    [Inject] private BezierFactory bezierFactory;
+    [Inject] private DiContainer diContainer;
+
+    public GameObject checkpointPrefab;
 
     void Start()
     {
@@ -45,8 +49,17 @@ public class CheckpointManager : MonoBehaviour
         allCheckpoints[checkpoint].CheckpointPassed();
     }
 
+    public void CreateCheckpoint()
+    {
+        GameObject newCheckpoint = diContainer.InstantiatePrefab(checkpointPrefab, new Vector3(0, 0, 0), Quaternion.identity, null);
+
+        AddCheckpoint(newCheckpoint.GetComponent<Checkpoint>());
+        bezierFactory.AddPoint(newCheckpoint.transform.position);
+    }
+
     public void AddCheckpoint(Checkpoint checkpoint)
     {
+        checkpoint.checkpointNumber = allCheckpoints.Count;
         allCheckpoints.Add(checkpoint);
     }
 

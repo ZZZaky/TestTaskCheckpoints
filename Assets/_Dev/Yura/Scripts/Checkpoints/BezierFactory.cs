@@ -18,12 +18,25 @@ public class BezierFactory : MonoBehaviour
         {
             spline[i].position = points[i];
         }
-        spline.AutoConstructSpline();
+        UpdateBezierSplines();
+    }
+
+    public void UpdatePoint(int index, Vector3 point)
+    {
+        spline[index].position = point;
+        UpdateBezierSplines();
     }
 
     public void AddPoint(Vector3 point)
     {
+        Debug.Log($"Checkpoints: {spline.Count}");
         spline.InsertNewPointAt(spline.Count);
         spline[spline.Count - 1].position = point;
+        Debug.Log($"Checkpoints: {spline.Count}");
+    }
+
+    public void UpdateBezierSplines()
+    {
+        spline.AutoConstructSpline();
     }
 }

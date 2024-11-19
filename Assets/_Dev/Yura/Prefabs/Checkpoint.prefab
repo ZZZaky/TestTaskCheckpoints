@@ -221,6 +221,7 @@ GameObject:
   - component: {fileID: 8815699736360018102}
   - component: {fileID: 7143650942001466270}
   - component: {fileID: 1887278936482123281}
+  - component: {fileID: 5477307338106405061}
   m_Layer: 0
   m_Name: Checkpoint
   m_TagString: Untagged
@@ -257,8 +258,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7a1a78de3d4e114d985a62a65c2b2c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  checkpointNumber: 3
-  checkpointPassed: 0
+  checkpointNumber: 0
+  isPassed: 0
 --- !u!65 &1887278936482123281
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -278,5 +279,17 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 3.8643436, y: 3.4586806, z: 0.16537414}
-  m_Center: {x: -2.0004377, y: 1.7168772, z: 0.0020061657}
+  m_Size: {x: 4.1957703, y: 3.4586806, z: 0.20331019}
+  m_Center: {x: 0.063510895, y: 1.7168772, z: 0.020974189}
+--- !u!114 &5477307338106405061
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8903354939265371047}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26dcdf3a3ec22a443ae587de2f9d1e85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
