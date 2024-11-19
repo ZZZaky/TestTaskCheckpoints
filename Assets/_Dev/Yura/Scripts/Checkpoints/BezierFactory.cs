@@ -11,11 +11,6 @@ public class BezierFactory : MonoBehaviour
 {
     public BezierSpline spline;
 
-    void Start()
-    {
-        Debug.Log(spline[0].position.GetType());
-    }
-
     public void CreatePoints(List<Vector3> points)
     {
         spline.Initialize(points.Count);

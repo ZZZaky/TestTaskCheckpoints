@@ -19,7 +19,6 @@ public class CheckpointManager : MonoBehaviour
         }
         else
         {
-            Debug.Log(allCheckpoints.Count);
             List<Vector3> points = new List<Vector3>();
             foreach (var checkpoint in allCheckpoints) 
             {
