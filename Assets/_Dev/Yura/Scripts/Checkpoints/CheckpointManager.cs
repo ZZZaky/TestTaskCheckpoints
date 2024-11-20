@@ -9,15 +9,16 @@ using Zenject;
 /// </summary>
 public class CheckpointManager : MonoBehaviour
 {
+    public GameObject checkpointPrefab;
     public List<Checkpoint> allCheckpoints;
+    public bool ringRoad = false;
+
     [Inject] private BezierFactory bezierFactory;
     [Inject] private DiContainer diContainer;
 
-    public GameObject checkpointPrefab;
-
     void Start()
     {
-        if (allCheckpoints == null || allCheckpoints.Count == 0)
+        if (allCheckpoints == null || allCheckpoints.Count < 2)
         {
             allCheckpoints = new List<Checkpoint>();
         }
@@ -30,13 +31,14 @@ public class CheckpointManager : MonoBehaviour
             }
             bezierFactory.CreatePoints(points);
         }
+        ChangeRingRoad(false);
     }
 
     public void OnEnterCheckpoint(int checkpoint)
     {
         if (checkpoint == 0 || allCheckpoints[checkpoint - 1].isPassed) 
         {
-            DoneCheckpoint(checkpoint);
+            allCheckpoints[checkpoint].CheckpointPassed();
             if (checkpoint == allCheckpoints.Count - 1)
             {
                 OnFinish();
@@ -44,27 +46,34 @@ public class CheckpointManager : MonoBehaviour
         }
     }
 
-    public void DoneCheckpoint(int checkpoint)
-    {
-        allCheckpoints[checkpoint].CheckpointPassed();
-    }
-
-    public void CreateCheckpoint()
+    public void CreateCheckpointAt(int index)
     {
         GameObject newCheckpoint = diContainer.InstantiatePrefab(checkpointPrefab, new Vector3(0, 0, 0), Quaternion.identity, null);
 
-        AddCheckpoint(newCheckpoint.GetComponent<Checkpoint>());
-        bezierFactory.AddPoint(newCheckpoint.transform.position);
+        // index = -1 зарезервирован для создания нового последнего чекпоинта в редакторе
+        int newCheckpointIndex = index == -1 ? allCheckpoints.Count : index;
+        bezierFactory.InsertPointAt(newCheckpoint.transform.position, newCheckpointIndex);
+        InsertCheckpointAt(newCheckpoint.GetComponent<Checkpoint>(), newCheckpointIndex);
+        for (int i = newCheckpointIndex + 1; i < allCheckpoints.Count; i++)
+        {
+            allCheckpoints[i].checkpointNumber++;
+        }
     }
 
-    public void AddCheckpoint(Checkpoint checkpoint)
+    private void InsertCheckpointAt(Checkpoint checkpoint, int index)
     {
-        checkpoint.checkpointNumber = allCheckpoints.Count;
-        allCheckpoints.Add(checkpoint);
+        checkpoint.checkpointNumber = index;
+        allCheckpoints.Insert(index, checkpoint);
     }
 
     public void DeleteCheckpoint(int checkpoint)
     {
+        allCheckpoints[checkpoint].Delete();
+        for (int i = checkpoint + 1; i < allCheckpoints.Count; i++ )
+        {
+            allCheckpoints[i].checkpointNumber--;
+        }
+        bezierFactory.DeletePointAt(checkpoint);
         allCheckpoints.RemoveAt(checkpoint);
     }
 
@@ -75,6 +84,12 @@ public class CheckpointManager : MonoBehaviour
             checkpoint.Delete();
         }
         allCheckpoints = new List<Checkpoint>();
+    }
+
+    public void ChangeRingRoad(bool state)
+    {
+        ringRoad = state;
+        bezierFactory.ChangeRingRoad(ringRoad);
     }
 
     private void OnFinish()

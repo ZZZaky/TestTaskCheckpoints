@@ -7,19 +7,23 @@ using static UnityEngine.UI.ScrollRect;
 public class CheckpointDrag : MonoBehaviour
 {
     [Inject] private BezierFactory bezierFactory;
+    [Inject] private SelectedCheckpointManager selectedCheckpointManager;
+    public Outline outline;
 
     private Vector3 newPosition;
     private Quaternion newRotation;
     private float rotationAmount = 0.3f;
-    private float movementTime = 5;
+    private float movementTime = 5f;
 
     void Start()
     {
         newPosition = transform.position;
         newRotation = transform.rotation;
+        outline.enabled = false;
     }
     public void OnMouseDrag()
     {
+        selectedCheckpointManager.SelectCheckpoint(this.gameObject);
         Vector3 mousePosition = new Vector3(Input.mousePosition.x, Input.mousePosition.y, Camera.main.WorldToScreenPoint(transform.position).z);
         Vector3 objPosition = Camera.main.ScreenToWorldPoint(mousePosition);
         

@@ -27,14 +27,33 @@ public class BezierFactory : MonoBehaviour
         UpdateBezierSplines();
     }
 
-    public void AddPoint(Vector3 point)
+    public void UpdateSpline()
     {
-        spline.InsertNewPointAt(spline.Count);
-        spline[spline.Count - 1].position = point;
+        UpdateBezierSplines();
     }
 
-    public void UpdateBezierSplines()
+    public void InsertPointAt(Vector3 point, int index)
+    {
+        spline.InsertNewPointAt(index);
+        spline[index].position = point;
+        UpdateBezierSplines();
+    }
+
+    public void ChangeRingRoad(bool state)
+    {
+        spline.loop = state;
+        UpdateBezierSplines();
+    }
+
+    public void DeletePointAt(int index)
+    {
+        spline.RemovePointAt(index);
+        UpdateBezierSplines();
+    }
+
+    private void UpdateBezierSplines()
     {
         spline.AutoConstructSpline();
     }
+
 }
