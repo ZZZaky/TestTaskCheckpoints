@@ -1066,7 +1066,6 @@ MonoBehaviour:
   - {fileID: 1118679919}
   - {fileID: 54482063}
   - {fileID: 447714557}
-  bezierFactory: {fileID: 1378878424}
   checkpointPrefab: {fileID: 8903354939265371047, guid: 85eb98b8b47fab24eae76fad3573e7ce, type: 3}
 --- !u!4 &647377502
 Transform:
@@ -2756,6 +2755,10 @@ PrefabInstance:
     - target: {fileID: 7497013858523875979, guid: d13c55220771c2c43b2aec49c41efb59, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 7497013858523875979, guid: d13c55220771c2c43b2aec49c41efb59, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
