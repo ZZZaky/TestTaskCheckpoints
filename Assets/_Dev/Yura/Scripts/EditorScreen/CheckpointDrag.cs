@@ -21,6 +21,7 @@ public class CheckpointDrag : MonoBehaviour
         newRotation = transform.rotation;
         outline.enabled = false;
     }
+
     public void OnMouseDrag()
     {
         selectedCheckpointManager.SelectCheckpoint(this.gameObject);
