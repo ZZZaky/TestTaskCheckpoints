@@ -5,6 +5,7 @@ public class PlayerHandler : MonoBehaviour
 {
     private CharacterController characterController;
     private PlayerMovement playerMovement;
+    private PlayerMenu playerMenu;
     private Camera playerCamera;
     private AudioListener playerAudioListener;
 
@@ -12,6 +13,7 @@ public class PlayerHandler : MonoBehaviour
     {
         characterController = this.GetComponent<CharacterController>();
         playerMovement = this.GetComponent<PlayerMovement>();
+        playerMenu = this.GetComponent<PlayerMenu>();
         playerCamera = this.GetComponentInChildren<Camera>();
         playerAudioListener = this.GetComponentInChildren<AudioListener>();
     }
@@ -20,6 +22,7 @@ public class PlayerHandler : MonoBehaviour
     {
         characterController.enabled = false;
         playerMovement.enabled = false;
+        playerMenu.enabled = false;
         playerCamera.enabled = false;
         playerAudioListener.enabled = false;
     }
@@ -28,6 +31,7 @@ public class PlayerHandler : MonoBehaviour
     {
         characterController.enabled = true;
         playerMovement.enabled = true;
+        playerMenu.enabled = true;
         playerCamera.enabled = true;
         playerAudioListener.enabled = true;
     }
