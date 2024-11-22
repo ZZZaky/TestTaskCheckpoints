@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 public class ResetMap : MonoBehaviour
 {
-    public void Test()
+    [Inject] CheckpointManager checkpointManager;
+
+    public void ResetCheckpoints()
     {
-        Debug.Log("Reset doing something!");
+        checkpointManager.ResetCheckpoints();
     }
 }

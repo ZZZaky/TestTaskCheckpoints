@@ -3251,7 +3251,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1779007988}
         m_TargetAssemblyTypeName: ResetMap, Assembly-CSharp
-        m_MethodName: Test
+        m_MethodName: ResetCheckpoints
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

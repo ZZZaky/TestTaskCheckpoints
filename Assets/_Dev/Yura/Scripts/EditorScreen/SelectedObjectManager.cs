@@ -70,8 +70,11 @@ public class SelectedObjectManager : MonoBehaviour
 
     public void DeselectObject()
     {
-        selectedObject.GetComponent<Outline>().enabled = false;
-        selectedObject = null;
-        checkpointEditorHandler.gameObject.SetActive(false);
+        if (selectedObject != null)
+        {
+            selectedObject.GetComponent<Outline>().enabled = false;
+            selectedObject = null;
+            checkpointEditorHandler.gameObject.SetActive(false);
+        }
     }
 }

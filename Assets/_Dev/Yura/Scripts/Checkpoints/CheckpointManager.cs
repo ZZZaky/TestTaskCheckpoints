@@ -25,14 +25,19 @@ public class CheckpointManager : MonoBehaviour
         }
         else
         {
-            List<Vector3> points = new List<Vector3>();
-            foreach (var checkpoint in allCheckpoints) 
-            {
-                points.Add(checkpoint.transform.position);
-            }
-            bezierFactory.CreatePoints(points);
+            InitializeCheckpoints();
         }
         ChangeRingRoad(false);
+    }
+
+    public void InitializeCheckpoints()
+    {
+        List<Vector3> points = new List<Vector3>();
+        foreach (Checkpoint checkpoint in allCheckpoints)
+        {
+            points.Add(checkpoint.transform.position);
+        }
+        bezierFactory.CreatePoints(points);
     }
 
     public void OnEnterCheckpoint(int checkpoint)
@@ -59,6 +64,8 @@ public class CheckpointManager : MonoBehaviour
         {
             allCheckpoints[i].checkpointNumber++;
         }
+
+        selectedObjectManager.DeselectObject();
     }
 
     public void DeleteCheckpointAt(int index)
@@ -69,6 +76,8 @@ public class CheckpointManager : MonoBehaviour
         {
             allCheckpoints[i].checkpointNumber--;
         }
+
+        selectedObjectManager.DeselectObject();
         bezierFactory.DeletePointAt(index);
         allCheckpoints.RemoveAt(index);
     }
@@ -80,6 +89,9 @@ public class CheckpointManager : MonoBehaviour
             checkpoint.Delete();
         }
         allCheckpoints = new List<Checkpoint>();
+        InitializeCheckpoints();
+
+        selectedObjectManager.DeselectObject();
     }
 
     public void ChangeRingRoad(bool state)
@@ -92,6 +104,7 @@ public class CheckpointManager : MonoBehaviour
     {
         checkpoint.checkpointNumber = index;
         allCheckpoints.Insert(index, checkpoint);
+        selectedObjectManager.DeselectObject();
     }
 
     private void OnFinish()
