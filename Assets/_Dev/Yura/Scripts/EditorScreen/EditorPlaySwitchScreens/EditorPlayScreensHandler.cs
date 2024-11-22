@@ -1,28 +1,25 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
+using Zenject;
 
 public class EditorPlayScreensHandler : MonoBehaviour
 {
-    public EditorSwitcher editor;
-    public PlayerSwitcher player;
+    [Inject] private EditorHandler editorCamera;
+    [Inject] private PlayerHandler player;
 
     void Start()
     {
-        editor.EditorSwitchState(true);
-        player.PlayerSwitchState(false);
+        SwitchToEditor();
     }
 
     public void SwitchToEditor()
     {
-        editor.EditorSwitchState(true);
-        player.PlayerSwitchState(false);
+        editorCamera.Activate();
+        player.Deactivate();
     }
 
     public void SwitchToPlay()
     {
-        editor.EditorSwitchState(false);
-        player.PlayerPreview();
+        editorCamera.Deactivate();
+        player.Activate();
     }
 }

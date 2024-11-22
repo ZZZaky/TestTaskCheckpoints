@@ -7,10 +7,11 @@ using Zenject;
 public class RingRoadSwitcher : MonoBehaviour
 {
     [Inject] CheckpointManager checkpointManager;
-    public Toggle switcher;
+    private Toggle switcher;
 
     void Start()
     {
+        switcher = GetComponent<Toggle>();
         SwitchRingRoad();
     }
 

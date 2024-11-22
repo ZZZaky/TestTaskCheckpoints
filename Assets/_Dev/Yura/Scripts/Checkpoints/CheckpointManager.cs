@@ -9,9 +9,9 @@ using Zenject;
 /// </summary>
 public class CheckpointManager : MonoBehaviour
 {
-    public GameObject checkpointPrefab;
-    public List<Checkpoint> allCheckpoints;
     public bool ringRoad = false;
+    public List<Checkpoint> allCheckpoints;
+    public GameObject checkpointPrefab;
 
     [Inject] private BezierFactory bezierFactory;
     [Inject] private DiContainer diContainer;
