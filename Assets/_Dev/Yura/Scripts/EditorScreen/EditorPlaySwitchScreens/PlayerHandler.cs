@@ -3,7 +3,6 @@ using Zenject;
 
 public class PlayerHandler : MonoBehaviour
 {
-    [Inject] private SelectedObjectManager selectedObjectManager;
     private CharacterController characterController;
     private PlayerMovement playerMovement;
     private Camera playerCamera;
@@ -23,8 +22,6 @@ public class PlayerHandler : MonoBehaviour
         playerMovement.enabled = false;
         playerCamera.enabled = false;
         playerAudioListener.enabled = false;
-
-        selectedObjectManager.isOn = true;
     }
 
     public void Activate()
@@ -33,7 +30,5 @@ public class PlayerHandler : MonoBehaviour
         playerMovement.enabled = true;
         playerCamera.enabled = true;
         playerAudioListener.enabled = true;
-
-        selectedObjectManager.isOn = false;
     }
 }

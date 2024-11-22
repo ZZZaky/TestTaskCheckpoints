@@ -5,6 +5,7 @@ public class EditorPlayScreensHandler : MonoBehaviour
 {
     [Inject] private EditorHandler editorCamera;
     [Inject] private PlayerHandler player;
+    [Inject] private SelectedObjectManager selectedObjectManager;
 
     void Start()
     {
@@ -15,11 +16,13 @@ public class EditorPlayScreensHandler : MonoBehaviour
     {
         editorCamera.Activate();
         player.Deactivate();
+        selectedObjectManager.isOn = true;
     }
 
     public void SwitchToPlay()
     {
         editorCamera.Deactivate();
         player.Activate();
+        selectedObjectManager.isOn = false;
     }
 }
