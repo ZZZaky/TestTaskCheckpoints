@@ -15,6 +15,7 @@ public class CheckpointManager : MonoBehaviour
 
     [Inject] private BezierFactory bezierFactory;
     [Inject] private DiContainer diContainer;
+    [Inject] private SelectedObjectManager selectedObjectManager;
 
     void Start()
     {
@@ -52,7 +53,7 @@ public class CheckpointManager : MonoBehaviour
 
         // index = -1 зарезервирован для создания нового последнего чекпоинта в редакторе
         int newCheckpointIndex = index == -1 ? allCheckpoints.Count : index;
-        bezierFactory.InsertPointAt(newCheckpoint.transform.position, newCheckpointIndex);
+        bezierFactory.InsertPointAt(newCheckpointIndex, newCheckpoint.transform.position);
         InsertCheckpointAt(newCheckpoint.GetComponent<Checkpoint>(), newCheckpointIndex);
         for (int i = newCheckpointIndex + 1; i < allCheckpoints.Count; i++)
         {
@@ -60,21 +61,16 @@ public class CheckpointManager : MonoBehaviour
         }
     }
 
-    private void InsertCheckpointAt(Checkpoint checkpoint, int index)
+    public void DeleteCheckpointAt(int index)
     {
-        checkpoint.checkpointNumber = index;
-        allCheckpoints.Insert(index, checkpoint);
-    }
-
-    public void DeleteCheckpoint(int checkpoint)
-    {
-        allCheckpoints[checkpoint].Delete();
-        for (int i = checkpoint + 1; i < allCheckpoints.Count; i++ )
+        selectedObjectManager.DeselectObject();
+        allCheckpoints[index].Delete();
+        for (int i = index + 1; i < allCheckpoints.Count; i++ )
         {
             allCheckpoints[i].checkpointNumber--;
         }
-        bezierFactory.DeletePointAt(checkpoint);
-        allCheckpoints.RemoveAt(checkpoint);
+        bezierFactory.DeletePointAt(index);
+        allCheckpoints.RemoveAt(index);
     }
 
     public void ResetCheckpoints()
@@ -90,6 +86,12 @@ public class CheckpointManager : MonoBehaviour
     {
         ringRoad = state;
         bezierFactory.ChangeRingRoad(ringRoad);
+    }
+
+    private void InsertCheckpointAt(Checkpoint checkpoint, int index)
+    {
+        checkpoint.checkpointNumber = index;
+        allCheckpoints.Insert(index, checkpoint);
     }
 
     private void OnFinish()

@@ -67,4 +67,11 @@ public class SelectedObjectManager : MonoBehaviour
 
         checkpointEditorHandler.SetSelectedCheckpoint(checkpoint.GetComponent<Checkpoint>().checkpointNumber);
     }
+
+    public void DeselectObject()
+    {
+        selectedObject.GetComponent<Outline>().enabled = false;
+        selectedObject = null;
+        checkpointEditorHandler.gameObject.SetActive(false);
+    }
 }

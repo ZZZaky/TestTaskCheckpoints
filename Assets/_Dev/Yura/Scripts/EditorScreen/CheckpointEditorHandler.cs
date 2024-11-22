@@ -51,6 +51,6 @@ public class CheckpointEditorHandler : MonoBehaviour
 
     public void DeleteCheckpoint()
     {
-        checkpointManager.DeleteCheckpoint(index);
+        checkpointManager.DeleteCheckpointAt(index);
     }
 }
