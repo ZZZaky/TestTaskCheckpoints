@@ -11,10 +11,10 @@ public class PlayerHandler : MonoBehaviour
 
     void Start()
     {
-        characterController = GetComponent<CharacterController>();
-        playerMovement = GetComponent<PlayerMovement>();
-        playerCamera = GetComponentInChildren<Camera>();
-        playerAudioListener = GetComponentInChildren<AudioListener>();
+        characterController = this.GetComponent<CharacterController>();
+        playerMovement = this.GetComponent<PlayerMovement>();
+        playerCamera = this.GetComponentInChildren<Camera>();
+        playerAudioListener = this.GetComponentInChildren<AudioListener>();
     }
 
     public void Deactivate()
