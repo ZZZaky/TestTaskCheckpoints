@@ -35,16 +35,10 @@ public class PlayerHandler : MonoBehaviour
         playerMenu.enabled = true;
         playerCamera.enabled = true;
         playerAudioListener.enabled = true;
-        Debug.Log("Activate");
-        Debug.Log($"Saved: {playerInEditorPosition}");
-        Debug.Log("------------------------");
     }
 
     public void Deactivate()
     {
-        Debug.Log("Deactivate");
-        Debug.Log($"Old: {transform.position}");
-        Debug.Log($"New: {playerInEditorPosition}");
         transform.position = playerInEditorPosition;
         transform.rotation = playerInEditorRotation;
         playerDrag.enabled = true;
@@ -53,6 +47,5 @@ public class PlayerHandler : MonoBehaviour
         playerMenu.enabled = false;
         playerCamera.enabled = false;
         playerAudioListener.enabled = false;
-        Debug.Log("------------------------");
     }
 }
