@@ -7,19 +7,17 @@ using Zenject;
 public class SelectedObjectManager : MonoBehaviour
 {
     public GameObject selectedObject;
-    public bool isOn;
 
     [Inject] private CheckpointEditorHandler checkpointEditorHandler;
 
     void Start()
     {
         selectedObject = null;
-        isOn = true;
     }
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0) && selectedObject != null && isOn)
+        if (Input.GetMouseButtonDown(0) && selectedObject != null)
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;

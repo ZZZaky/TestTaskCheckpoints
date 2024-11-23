@@ -3,9 +3,8 @@ using Zenject;
 
 public class EditorPlayScreensHandler : MonoBehaviour
 {
-    [Inject] private EditorHandler editorCamera;
+    [Inject] private EditorHandler editor;
     [Inject] private PlayerHandler player;
-    [Inject] private SelectedObjectManager selectedObjectManager;
 
     void Start()
     {
@@ -14,15 +13,13 @@ public class EditorPlayScreensHandler : MonoBehaviour
 
     public void SwitchToEditor()
     {
-        editorCamera.Activate();
+        editor.Activate();
         player.Deactivate();
-        selectedObjectManager.isOn = true;
     }
 
     public void SwitchToPlay()
     {
-        editorCamera.Deactivate();
+        editor.Deactivate();
         player.Activate();
-        selectedObjectManager.isOn = false;
     }
 }

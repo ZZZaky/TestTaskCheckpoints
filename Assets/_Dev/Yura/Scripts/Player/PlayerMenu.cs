@@ -1,22 +1,47 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 public class PlayerMenu : MonoBehaviour
 {
-    public Canvas menuUI;
-    private PlayerHandler playerHandler;
+    private GameObject menuUI;
+    private bool menuState;
+    [Inject] private PlayerHandler playerHandler;
+    [Inject] private EditorPlayScreensHandler editorPlayScreensHandler;
 
-    void Start()
+    void Awake()
     {
-        playerHandler = GetComponent<PlayerHandler>();
+        menuUI = GetComponentInChildren<Canvas>().gameObject;
+        menuState = false;
+        menuUI.SetActive(menuState);
     }
 
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            playerHandler.enabled = !playerHandler.enabled;
+            Pause();
         }
+    }
+
+    public void Pause()
+    {
+        menuState = !menuState;
+        Time.timeScale = menuState ? 0f : 1f;
+        menuUI.gameObject.SetActive(menuState);
+        playerHandler.GetComponent<PlayerMovement>().enabled = !menuState;
+    }
+
+    public void GoToEditor()
+    {
+        Pause();
+        editorPlayScreensHandler.SwitchToEditor();
+    }
+
+    public void ExitGame()
+    {
+        Debug.Log("Quit");
+        Application.Quit();
     }
 }

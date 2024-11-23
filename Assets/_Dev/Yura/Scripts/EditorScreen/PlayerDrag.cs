@@ -20,9 +20,9 @@ public class PlayerDrag : MonoBehaviour
         outline.enabled = false;
     }
 
-    public void OnMouseDrag()
+    private void OnMouseDrag()
     {
-        if (!selectedObjectManager.isOn) { return; }
+        if (!this.enabled) { return; }
         selectedObjectManager.SelectPlayer(this.gameObject);
         Vector3 mousePosition = new Vector3(Input.mousePosition.x, Input.mousePosition.y, Camera.main.WorldToScreenPoint(transform.position).z);
         Vector3 objPosition = Camera.main.ScreenToWorldPoint(mousePosition);
