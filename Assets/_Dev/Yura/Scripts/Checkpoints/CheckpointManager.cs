@@ -2,6 +2,7 @@ using BezierSolution;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using Zenject;
 
 /// <summary>
@@ -12,6 +13,8 @@ public class CheckpointManager : MonoBehaviour
     public bool ringRoad = false;
     public List<Checkpoint> allCheckpoints;
     public GameObject checkpointPrefab;
+
+    public Toggle ringRoadToggle; // temporary solution
 
     [Inject] private BezierFactory bezierFactory;
     [Inject] private DiContainer diContainer;
@@ -98,6 +101,7 @@ public class CheckpointManager : MonoBehaviour
     {
         ringRoad = state;
         bezierFactory.ChangeRingRoad(ringRoad);
+        ringRoadToggle.isOn = ringRoad;
     }
 
     private void InsertCheckpointAt(Checkpoint checkpoint, int index)

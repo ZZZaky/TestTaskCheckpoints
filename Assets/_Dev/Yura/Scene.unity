@@ -2658,6 +2658,7 @@ MonoBehaviour:
   - {fileID: 54482063}
   - {fileID: 447714557}
   checkpointPrefab: {fileID: 8903354939265371047, guid: 85eb98b8b47fab24eae76fad3573e7ce, type: 3}
+  ringRoadToggle: {fileID: 2096324900}
 --- !u!4 &647377502
 Transform:
   m_ObjectHideFlags: 0
