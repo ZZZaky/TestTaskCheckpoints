@@ -7,7 +7,7 @@ public class PlayerMenu : MonoBehaviour
 {
     private GameObject menuUI;
     private bool menuState;
-    [Inject] private PlayerHandler playerHandler;
+    [Inject] private PlayerManager playerManager;
     [Inject] private EditorPlayScreensHandler editorPlayScreensHandler;
 
     void Awake()
@@ -30,7 +30,7 @@ public class PlayerMenu : MonoBehaviour
         menuState = !menuState;
         Time.timeScale = menuState ? 0f : 1f;
         menuUI.gameObject.SetActive(menuState);
-        playerHandler.GetComponent<PlayerMovement>().enabled = !menuState;
+        playerManager.currentPlayer.GetComponent<PlayerMovement>().enabled = !menuState;
     }
 
     public void GoToEditor()

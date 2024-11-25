@@ -8,19 +8,27 @@ public class ToggleMenuHandler : MonoBehaviour
     public Toggle toggleButton;
     public Image dropdownArrowClosed;
     public Image dropdownArrowOpened;
-    public List<GameObject> menuButtons;
+    public GameObject save;
+    public GameObject load;
+    public GameObject reset;
+
+    private SaveMap saveButton;
+    private LoadMap loadButton;
+    private ResetMap resetButton;
 
     void Start()
     {
+        saveButton = save.GetComponent<SaveMap>();
+        loadButton = load.GetComponent<LoadMap>();
+        resetButton = reset.GetComponent<ResetMap>();
         ToggleMenu();
     }
 
     public void ToggleMenu()
     {
-        for (int i = 0; i < menuButtons.Count; i++)
-        {
-            menuButtons[i].SetActive(toggleButton.isOn);
-        }
+        save.SetActive(toggleButton.isOn);
+        load.SetActive(toggleButton.isOn);
+        reset.SetActive(toggleButton.isOn);
 
         if(toggleButton.isOn)
         {
@@ -32,5 +40,26 @@ public class ToggleMenuHandler : MonoBehaviour
             dropdownArrowClosed.enabled = true;
             dropdownArrowOpened.enabled = false;
         }
+        saveButton.CloseUI();
+        loadButton.CloseUI();
+    }
+
+    public void OnClickSave()
+    {
+        loadButton.CloseUI();
+        saveButton.OnClickSave();
+    }
+
+    public void OnClickLoad()
+    {
+        saveButton.CloseUI();
+        loadButton.OnClickLoad();
+    }
+
+    public void OnClickReset()
+    {
+        saveButton.CloseUI();
+        loadButton.CloseUI();
+        resetButton.ResetCheckpoints();
     }
 }

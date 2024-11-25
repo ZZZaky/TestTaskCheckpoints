@@ -17,19 +17,6 @@ public class CheckpointManager : MonoBehaviour
     [Inject] private DiContainer diContainer;
     [Inject] private SelectedObjectManager selectedObjectManager;
 
-    void Start()
-    {
-        if (allCheckpoints == null || allCheckpoints.Count < 2)
-        {
-            allCheckpoints = new List<Checkpoint>();
-        }
-        else
-        {
-            InitializeCheckpoints();
-        }
-        ChangeRingRoad(false);
-    }
-
     public void InitializeCheckpoints()
     {
         List<Vector3> points = new List<Vector3>();
@@ -65,6 +52,19 @@ public class CheckpointManager : MonoBehaviour
             allCheckpoints[i].checkpointNumber++;
         }
 
+        selectedObjectManager.DeselectObject();
+    }
+
+    public void CreateCheckpointFromMap(CheckpointData checkpoint)
+    {
+        GameObject newCheckpoint = diContainer.InstantiatePrefab(checkpointPrefab, 
+            new Vector3(checkpoint.transform.position.x, checkpoint.transform.position.y, checkpoint.transform.position.z),
+            new Quaternion(checkpoint.transform.rotation.x, checkpoint.transform.rotation.y, checkpoint.transform.rotation.z, checkpoint.transform.rotation.w), 
+            null);
+
+        int newCheckpointIndex = allCheckpoints.Count;
+        bezierFactory.InsertPointAt(newCheckpointIndex, newCheckpoint.transform.position);
+        InsertCheckpointAt(newCheckpoint.GetComponent<Checkpoint>(), newCheckpointIndex);
         selectedObjectManager.DeselectObject();
     }
 

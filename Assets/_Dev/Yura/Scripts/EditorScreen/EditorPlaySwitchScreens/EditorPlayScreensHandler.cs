@@ -4,7 +4,7 @@ using Zenject;
 public class EditorPlayScreensHandler : MonoBehaviour
 {
     [Inject] private EditorHandler editor;
-    [Inject] private PlayerHandler player;
+    [Inject] private PlayerManager playerManager;
 
     void Start()
     {
@@ -14,12 +14,12 @@ public class EditorPlayScreensHandler : MonoBehaviour
     public void SwitchToEditor()
     {
         editor.Activate();
-        player.Deactivate();
+        playerManager.currentPlayer.GetComponent<PlayerHandler>().Deactivate();
     }
 
     public void SwitchToPlay()
     {
         editor.Deactivate();
-        player.Activate();
+        playerManager.currentPlayer.GetComponent<PlayerHandler>().Activate();
     }
 }

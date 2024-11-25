@@ -9,10 +9,9 @@ public class RingRoadSwitcher : MonoBehaviour
     [Inject] CheckpointManager checkpointManager;
     private Toggle switcher;
 
-    void Start()
+    void Awake()
     {
         switcher = GetComponent<Toggle>();
-        SwitchRingRoad();
     }
 
     public void SwitchRingRoad()

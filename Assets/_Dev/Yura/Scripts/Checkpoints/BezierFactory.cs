@@ -14,12 +14,6 @@ public class BezierFactory : MonoBehaviour
     private int pointsCount;
     private List<Vector3> pointsContainer;
 
-    void Awake()
-    {
-        pointsCount = 0;
-        pointsContainer = new List<Vector3>();
-    }
-
     public void CreatePoints(List<Vector3> points)
     {
         pointsCount = points.Count;
