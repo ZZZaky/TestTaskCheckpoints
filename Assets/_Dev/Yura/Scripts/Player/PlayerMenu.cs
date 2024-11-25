@@ -5,14 +5,13 @@ using Zenject;
 
 public class PlayerMenu : MonoBehaviour
 {
-    private GameObject menuUI;
+    public GameObject menuUI;
+
     private bool menuState;
-    [Inject] private PlayerManager playerManager;
     [Inject] private EditorPlayScreensHandler editorPlayScreensHandler;
 
     void Awake()
     {
-        menuUI = GetComponentInChildren<Canvas>().gameObject;
         menuState = false;
         menuUI.SetActive(menuState);
     }
@@ -30,7 +29,7 @@ public class PlayerMenu : MonoBehaviour
         menuState = !menuState;
         Time.timeScale = menuState ? 0f : 1f;
         menuUI.gameObject.SetActive(menuState);
-        playerManager.currentPlayer.GetComponent<PlayerMovement>().enabled = !menuState;
+        GetComponent<PlayerMovement>().enabled = !menuState;
     }
 
     public void GoToEditor()

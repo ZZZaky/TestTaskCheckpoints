@@ -7,6 +7,7 @@ public class PlayerHandler : MonoBehaviour
     private CharacterController characterController;
     private PlayerMovement playerMovement;
     private PlayerMenu playerMenu;
+    private PlayerWin playerWin;
     private Camera playerCamera;
     private AudioListener playerAudioListener;
 
@@ -19,6 +20,7 @@ public class PlayerHandler : MonoBehaviour
         characterController = GetComponent<CharacterController>();
         playerMovement = GetComponent<PlayerMovement>();
         playerMenu = GetComponent<PlayerMenu>();
+        playerWin = GetComponent<PlayerWin>();
         playerCamera = GetComponentInChildren<Camera>();
         playerAudioListener = GetComponentInChildren<AudioListener>();
         playerInEditorPosition = transform.position;
@@ -33,6 +35,7 @@ public class PlayerHandler : MonoBehaviour
         characterController.enabled = true;
         playerMovement.enabled = true;
         playerMenu.enabled = true;
+        playerWin.enabled = true;
         playerCamera.enabled = true;
         playerAudioListener.enabled = true;
     }
@@ -45,6 +48,7 @@ public class PlayerHandler : MonoBehaviour
         characterController.enabled = false;
         playerMovement.enabled = false;
         playerMenu.enabled = false;
+        playerWin.enabled = false;
         playerCamera.enabled = false;
         playerAudioListener.enabled = false;
     }

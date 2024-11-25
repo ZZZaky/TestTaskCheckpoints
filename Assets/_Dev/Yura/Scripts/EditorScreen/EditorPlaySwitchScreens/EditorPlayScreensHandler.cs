@@ -5,6 +5,7 @@ public class EditorPlayScreensHandler : MonoBehaviour
 {
     [Inject] private EditorHandler editor;
     [Inject] private PlayerManager playerManager;
+    [Inject] private CheckpointManager checkpointManager;
 
     void Start()
     {
@@ -13,12 +14,23 @@ public class EditorPlayScreensHandler : MonoBehaviour
 
     public void SwitchToEditor()
     {
-        editor.Activate();
+        checkpointManager.ResetPassedCheckpoints();
         playerManager.currentPlayer.GetComponent<PlayerHandler>().Deactivate();
+        editor.Activate();
     }
 
     public void SwitchToPlay()
     {
+        checkpointManager.ResetPassedCheckpoints();
+        editor.Deactivate();
+        playerManager.currentPlayer.GetComponent<PlayerHandler>().Activate();
+    }
+
+    public void RestartPlay()
+    {
+        checkpointManager.ResetPassedCheckpoints();
+        playerManager.currentPlayer.GetComponent<PlayerHandler>().Deactivate();
+        editor.Activate();
         editor.Deactivate();
         playerManager.currentPlayer.GetComponent<PlayerHandler>().Activate();
     }

@@ -19,6 +19,7 @@ public class CheckpointManager : MonoBehaviour
     [Inject] private BezierFactory bezierFactory;
     [Inject] private DiContainer diContainer;
     [Inject] private SelectedObjectManager selectedObjectManager;
+    [Inject] private PlayerManager playerManager;
 
     public void InitializeCheckpoints()
     {
@@ -104,6 +105,14 @@ public class CheckpointManager : MonoBehaviour
         ringRoadToggle.isOn = ringRoad;
     }
 
+    public void ResetPassedCheckpoints()
+    {
+        for (int i = 0; i < allCheckpoints.Count; i++)
+        {
+            allCheckpoints[i].isPassed = false;
+        }
+    }
+
     private void InsertCheckpointAt(Checkpoint checkpoint, int index)
     {
         checkpoint.checkpointNumber = index;
@@ -113,6 +122,6 @@ public class CheckpointManager : MonoBehaviour
 
     private void OnFinish()
     {
-        // TODO
+        playerManager.currentPlayer.GetComponent<PlayerWin>().Pause();
     }
 }

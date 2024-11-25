@@ -11,9 +11,9 @@ using Zenject;
 public class Checkpoint : MonoBehaviour
 {
     public int checkpointNumber;
+    public bool isPassed; 
 
     [Inject] private CheckpointManager checkpointManager;
-    public bool isPassed; 
 
     void Start()
     {
@@ -24,7 +24,6 @@ public class Checkpoint : MonoBehaviour
     {
         if (player.gameObject.tag == "Player" && !isPassed)
         {
-            Debug.Log("Checkpoint passed");
             checkpointManager.OnEnterCheckpoint(checkpointNumber);
         }
     }
@@ -32,7 +31,6 @@ public class Checkpoint : MonoBehaviour
     public void CheckpointPassed()
     {
         isPassed = true;
-        Debug.Log($"{checkpointNumber} done");
     }
 
     public void Delete()
