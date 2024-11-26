@@ -15,23 +15,24 @@ public class EditorPlayScreensHandler : MonoBehaviour
     public void SwitchToEditor()
     {
         checkpointManager.ResetPassedCheckpoints();
-        playerManager.currentPlayer.GetComponent<PlayerHandler>().Deactivate();
+        playerManager.currentPlayer.GetComponent<CarHandler>().Deactivate();
         editor.Activate();
     }
 
     public void SwitchToPlay()
     {
         checkpointManager.ResetPassedCheckpoints();
+        checkpointManager.StartPlaying();
         editor.Deactivate();
-        playerManager.currentPlayer.GetComponent<PlayerHandler>().Activate();
+        playerManager.currentPlayer.GetComponent<CarHandler>().Activate();
     }
 
     public void RestartPlay()
     {
         checkpointManager.ResetPassedCheckpoints();
-        playerManager.currentPlayer.GetComponent<PlayerHandler>().Deactivate();
+        playerManager.currentPlayer.GetComponent<CarHandler>().Deactivate();
         editor.Activate();
         editor.Deactivate();
-        playerManager.currentPlayer.GetComponent<PlayerHandler>().Activate();
+        playerManager.currentPlayer.GetComponent<CarHandler>().Activate();
     }
 }

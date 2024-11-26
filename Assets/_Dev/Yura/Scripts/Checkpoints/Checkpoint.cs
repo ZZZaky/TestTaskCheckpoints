@@ -33,6 +33,11 @@ public class Checkpoint : MonoBehaviour
         isPassed = true;
     }
 
+    public void ResetPassed()
+    {
+        isPassed = false;
+    }
+
     public void Delete()
     {
         Destroy(this.gameObject);

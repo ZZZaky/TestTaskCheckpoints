@@ -1,13 +1,14 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
-using Zenject;
 
-public class PlayerHandler : MonoBehaviour
+public class CarHandler : MonoBehaviour
 {
     private PlayerDrag playerDrag;
-    private CharacterController characterController;
-    private PlayerMovement playerMovement;
+    private CarController carController;
     private PlayerMenu playerMenu;
     private PlayerWin playerWin;
+    private PlayerUI playerUI;
     private Camera playerCamera;
     private AudioListener playerAudioListener;
 
@@ -17,10 +18,10 @@ public class PlayerHandler : MonoBehaviour
     void Awake()
     {
         playerDrag = GetComponent<PlayerDrag>();
-        characterController = GetComponent<CharacterController>();
-        playerMovement = GetComponent<PlayerMovement>();
+        carController = GetComponent<CarController>();
         playerMenu = GetComponent<PlayerMenu>();
         playerWin = GetComponent<PlayerWin>();
+        playerUI = GetComponent<PlayerUI>();
         playerCamera = GetComponentInChildren<Camera>();
         playerAudioListener = GetComponentInChildren<AudioListener>();
         playerInEditorPosition = transform.position;
@@ -32,10 +33,11 @@ public class PlayerHandler : MonoBehaviour
         playerInEditorPosition = transform.position;
         playerInEditorRotation = transform.rotation;
         playerDrag.enabled = false;
-        characterController.enabled = true;
-        playerMovement.enabled = true;
+        carController.enabled = true;
         playerMenu.enabled = true;
         playerWin.enabled = true;
+        playerUI.enabled = true;
+        playerUI.SwitchState(true);
         playerCamera.enabled = true;
         playerAudioListener.enabled = true;
     }
@@ -45,10 +47,11 @@ public class PlayerHandler : MonoBehaviour
         transform.position = playerInEditorPosition;
         transform.rotation = playerInEditorRotation;
         playerDrag.enabled = true;
-        characterController.enabled = false;
-        playerMovement.enabled = false;
+        carController.enabled = false;
         playerMenu.enabled = false;
         playerWin.enabled = false;
+        playerUI.SwitchState(false);
+        playerUI.enabled = false;
         playerCamera.enabled = false;
         playerAudioListener.enabled = false;
     }

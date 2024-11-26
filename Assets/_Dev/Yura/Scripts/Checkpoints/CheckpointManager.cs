@@ -31,15 +31,16 @@ public class CheckpointManager : MonoBehaviour
         bezierFactory.CreatePoints(points);
     }
 
-    public void OnEnterCheckpoint(int checkpoint)
+    public void OnEnterCheckpoint(int index)
     {
-        if (checkpoint == 0 || allCheckpoints[checkpoint - 1].isPassed) 
+        if (index == 0 || allCheckpoints[index - 1].isPassed) 
         {
-            allCheckpoints[checkpoint].CheckpointPassed();
-            if (checkpoint == allCheckpoints.Count - 1)
-            {
-                OnFinish();
-            }
+            allCheckpoints[index].CheckpointPassed();
+            playerManager.currentPlayer.GetComponent<PlayerUI>().PassingCheckpoints();
+
+            allCheckpoints[index].GetComponent<Outline>().enabled = false;
+            if (index == allCheckpoints.Count - 1) { OnFinish(); }
+            else { allCheckpoints[index + 1].GetComponent<Outline>().enabled = true; }
         }
     }
 
@@ -105,11 +106,20 @@ public class CheckpointManager : MonoBehaviour
         ringRoadToggle.isOn = ringRoad;
     }
 
+    public void StartPlaying()
+    {
+        if (allCheckpoints.Count > 0)
+        {
+            allCheckpoints[0].GetComponent<Outline>().enabled = true;
+        }
+    }
+
     public void ResetPassedCheckpoints()
     {
         for (int i = 0; i < allCheckpoints.Count; i++)
         {
             allCheckpoints[i].isPassed = false;
+            allCheckpoints[i].GetComponent<Outline>().enabled = false;
         }
     }
 
@@ -122,6 +132,17 @@ public class CheckpointManager : MonoBehaviour
 
     private void OnFinish()
     {
-        playerManager.currentPlayer.GetComponent<PlayerWin>().Pause();
+        if (ringRoad)
+        {
+            playerManager.currentPlayer.GetComponent<PlayerUI>().FinishLap();
+            for (int i = 0; i < allCheckpoints.Count; i++) 
+            {
+                allCheckpoints[i].ResetPassed();
+                playerManager.currentPlayer.GetComponent<PlayerUI>().ResetPassedCheckpoints();
+            }
+            allCheckpoints[^1].GetComponent<Outline>().enabled = false;
+            allCheckpoints[0].GetComponent<Outline>().enabled = true;
+        }
+        else { playerManager.currentPlayer.GetComponent<PlayerWin>().Pause(); }
     }
 }

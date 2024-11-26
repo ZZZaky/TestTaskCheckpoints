@@ -29,7 +29,7 @@ public class PlayerMenu : MonoBehaviour
         menuState = !menuState;
         Time.timeScale = menuState ? 0f : 1f;
         menuUI.gameObject.SetActive(menuState);
-        GetComponent<PlayerMovement>().enabled = !menuState;
+        GetComponent<CarController>().enabled = !menuState;
     }
 
     public void GoToEditor()

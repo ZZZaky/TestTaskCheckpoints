@@ -22,7 +22,7 @@ public class PlayerWin : MonoBehaviour
         winUIState = !winUIState;
         Time.timeScale = winUIState ? 0f : 1f;
         winUI.gameObject.SetActive(winUIState);
-        GetComponent<PlayerMovement>().enabled = !winUIState;
+        GetComponent<CarController>().enabled = !winUIState;
     }
 
     public void GoToEditor()
