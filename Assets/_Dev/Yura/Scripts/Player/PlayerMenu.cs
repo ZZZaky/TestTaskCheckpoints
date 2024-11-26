@@ -1,8 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
+/// <summary>
+/// Player menu's UI
+/// </summary>
 public class PlayerMenu : MonoBehaviour
 {
     public GameObject menuUI;
@@ -24,6 +25,9 @@ public class PlayerMenu : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Turning on the menu's UI
+    /// </summary>
     public void Pause()
     {
         menuState = !menuState;
@@ -32,12 +36,18 @@ public class PlayerMenu : MonoBehaviour
         GetComponent<CarController>().enabled = !menuState;
     }
 
+    /// <summary>
+    /// The event on click Editor
+    /// </summary>
     public void GoToEditor()
     {
         Pause();
         editorPlayScreensHandler.SwitchToEditor();
     }
 
+    /// <summary>
+    /// The event on click Quit
+    /// </summary>
     public void ExitGame()
     {
         Debug.Log("Quit");

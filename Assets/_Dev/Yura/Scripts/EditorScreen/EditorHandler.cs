@@ -1,14 +1,16 @@
 using UnityEngine;
-using UnityEngine.UI;
 using Zenject;
 
+/// <summary>
+/// Editor handler
+/// </summary>
 public class EditorHandler : MonoBehaviour
 {
     [SerializeField] private GameObject editorCanvas;
+
     private Camera editorCamera;
     private CameraController editorCameraController;
     private AudioListener editorAudioListener;
-
     [Inject] private CheckpointManager checkpointManager;
     [Inject] private SelectedObjectManager selectedObjectManager;
 
@@ -19,6 +21,9 @@ public class EditorHandler : MonoBehaviour
         editorCameraController = GetComponentInParent<CameraController>();
     }
 
+    /// <summary>
+    /// Activate editor
+    /// </summary>
     public void Activate()
     {
         SwitchEditingState(true);
@@ -28,6 +33,9 @@ public class EditorHandler : MonoBehaviour
         editorAudioListener.enabled = true;
     }
 
+    /// <summary>
+    /// Deactivate editor
+    /// </summary>
     public void Deactivate()
     {
         SwitchEditingState(false);
@@ -37,6 +45,10 @@ public class EditorHandler : MonoBehaviour
         editorAudioListener.enabled = false;
     }
 
+    /// <summary>
+    /// Switch editor's state
+    /// </summary>
+    /// <param name="state">New editor's state</param>
     private void SwitchEditingState(bool state)
     {
         for (int i = 0; i < checkpointManager.allCheckpoints.Count; i++)

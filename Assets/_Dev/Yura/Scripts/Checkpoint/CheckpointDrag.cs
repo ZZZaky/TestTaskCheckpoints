@@ -1,10 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
-public class PlayerDrag : MonoBehaviour
+/// <summary>
+/// All logic behind dragging the checkpoint in editor
+/// </summary>
+public class CheckpointDrag : MonoBehaviour
 {
+    [Inject] private BezierFactory bezierFactory;
     [Inject] private SelectedObjectManager selectedObjectManager;
     public Outline outline;
 
@@ -20,13 +22,17 @@ public class PlayerDrag : MonoBehaviour
         outline.enabled = false;
     }
 
-    private void OnMouseDrag()
+    /// <summary>
+    /// When trying to drag the checkpoint
+    /// </summary>
+    public void OnMouseDrag()
     {
         if (!this.enabled) { return; }
-        selectedObjectManager.SelectPlayer(this.gameObject);
+
+        selectedObjectManager.SelectCheckpoint(this.gameObject);
         Vector3 mousePosition = new Vector3(Input.mousePosition.x, Input.mousePosition.y, Camera.main.WorldToScreenPoint(transform.position).z);
         Vector3 objPosition = Camera.main.ScreenToWorldPoint(mousePosition);
-
+        
         if (Input.GetKey(KeyCode.Q))
         {
             newRotation *= Quaternion.Euler(Vector3.up * rotationAmount);
@@ -39,5 +45,7 @@ public class PlayerDrag : MonoBehaviour
         newPosition = new Vector3(objPosition.x, 0, objPosition.z);
         transform.position = Vector3.Lerp(transform.position, newPosition, Time.deltaTime * movementTime);
         transform.rotation = Quaternion.Lerp(transform.rotation, newRotation, Time.deltaTime * movementTime);
+
+        bezierFactory.UpdatePoint(this.GetComponent<Checkpoint>().checkpointNumber, transform.position);
     }
 }

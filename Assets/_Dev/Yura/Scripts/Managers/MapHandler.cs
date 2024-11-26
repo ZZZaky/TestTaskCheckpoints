@@ -1,8 +1,10 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
+/// <summary>
+/// Current map's info
+/// </summary>
 public class MapHandler : MonoBehaviour
 {
     public int id;
@@ -30,6 +32,10 @@ public class MapHandler : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Get the current map's info
+    /// </summary>
+    /// <returns>Current <see cref="Map"/></returns>
     public Map GetMap()
     {
         List<CheckpointData> checkpoints = new List<CheckpointData>();
@@ -42,6 +48,10 @@ public class MapHandler : MonoBehaviour
         return new Map(id, title, checkpoints, new PlayerData(playerManager.currentPlayer.transform), checkpointManager.ringRoad);
     }
 
+    /// <summary>
+    /// Set the current map to new map
+    /// </summary>
+    /// <param name="map">New <see cref="Map"/></param>
     public void SetMap(Map map)
     {
         id = map.mapId;

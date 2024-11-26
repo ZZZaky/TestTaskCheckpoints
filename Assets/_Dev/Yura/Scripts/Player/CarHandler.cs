@@ -1,7 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Player's scrpits and UIs handler
+/// </summary>
 public class CarHandler : MonoBehaviour
 {
     private PlayerDrag playerDrag;
@@ -28,6 +29,9 @@ public class CarHandler : MonoBehaviour
         playerInEditorRotation = transform.rotation;
     }
 
+    /// <summary>
+    /// Activate player
+    /// </summary>
     public void Activate()
     {
         playerInEditorPosition = transform.position;
@@ -42,6 +46,9 @@ public class CarHandler : MonoBehaviour
         playerAudioListener.enabled = true;
     }
 
+    /// <summary>
+    /// Deactivate player
+    /// </summary>
     public void Deactivate()
     {
         transform.position = playerInEditorPosition;

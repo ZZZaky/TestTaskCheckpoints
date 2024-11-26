@@ -1,7 +1,8 @@
 using UnityEngine;
-using System;
-using System.Collections.Generic;
 
+/// <summary>
+/// Car controller's logic
+/// </summary>
 public class CarController : MonoBehaviour
 {
     public float MoveSpeed = 50;
@@ -10,13 +11,10 @@ public class CarController : MonoBehaviour
     public float SteerAngle = 20;
     public float Traction = 1;
 
-    // Variables
     private Vector3 MoveForce;
 
-    // Update is called once per frame
     void Update()
     {
-
         // Moving
         MoveForce += transform.forward * MoveSpeed * Input.GetAxis("Vertical") * Time.deltaTime;
         transform.position += MoveForce * Time.deltaTime;

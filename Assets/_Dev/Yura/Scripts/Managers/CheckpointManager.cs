@@ -1,12 +1,10 @@
-using BezierSolution;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
 /// <summary>
-/// Manager for all checkpoints present
+/// Manager for all checkpoints on scene
 /// </summary>
 public class CheckpointManager : MonoBehaviour
 {
@@ -21,6 +19,9 @@ public class CheckpointManager : MonoBehaviour
     [Inject] private SelectedObjectManager selectedObjectManager;
     [Inject] private PlayerManager playerManager;
 
+    /// <summary>
+    /// Create Bezier spline from current checkpoints
+    /// </summary>
     public void InitializeCheckpoints()
     {
         List<Vector3> points = new List<Vector3>();
@@ -31,8 +32,13 @@ public class CheckpointManager : MonoBehaviour
         bezierFactory.CreatePoints(points);
     }
 
+    /// <summary>
+    /// The event when player enters checkpoint
+    /// </summary>
+    /// <param name="index"></param>
     public void OnEnterCheckpoint(int index)
     {
+        // Check if player enters the first checkpoint or the previous checkpoint was entered
         if (index == 0 || allCheckpoints[index - 1].isPassed) 
         {
             allCheckpoints[index].CheckpointPassed();
@@ -44,6 +50,10 @@ public class CheckpointManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Create new checkpoint at the specific index
+    /// </summary>
+    /// <param name="index">Index of the new checkpoint</param>
     public void CreateCheckpointAt(int index)
     {
         GameObject newCheckpoint = diContainer.InstantiatePrefab(checkpointPrefab, new Vector3(0, 0, 0), Quaternion.identity, null);
@@ -60,6 +70,10 @@ public class CheckpointManager : MonoBehaviour
         selectedObjectManager.DeselectObject();
     }
 
+    /// <summary>
+    /// Create new checkpoint at last index using info from <see cref="CheckpointData"/>
+    /// </summary>
+    /// <param name="checkpoint"></param>
     public void CreateCheckpointFromMap(CheckpointData checkpoint)
     {
         GameObject newCheckpoint = diContainer.InstantiatePrefab(checkpointPrefab, 
@@ -73,6 +87,10 @@ public class CheckpointManager : MonoBehaviour
         selectedObjectManager.DeselectObject();
     }
 
+    /// <summary>
+    /// Delete checkpoint at the specific index
+    /// </summary>
+    /// <param name="index">Index of the deleting chechpoint</param>
     public void DeleteCheckpointAt(int index)
     {
         selectedObjectManager.DeselectObject();
@@ -87,6 +105,9 @@ public class CheckpointManager : MonoBehaviour
         allCheckpoints.RemoveAt(index);
     }
 
+    /// <summary>
+    /// Reset (delete) all checkpoints in scene
+    /// </summary>
     public void ResetCheckpoints()
     {
         foreach (var checkpoint in allCheckpoints)
@@ -99,6 +120,10 @@ public class CheckpointManager : MonoBehaviour
         selectedObjectManager.DeselectObject();
     }
 
+    /// <summary>
+    /// Change ring road's state to new state
+    /// </summary>
+    /// <param name="state">New state</param>
     public void ChangeRingRoad(bool state)
     {
         ringRoad = state;
@@ -106,6 +131,9 @@ public class CheckpointManager : MonoBehaviour
         ringRoadToggle.isOn = ringRoad;
     }
 
+    /// <summary>
+    /// Highlight the first checkpoint when the play is started
+    /// </summary>
     public void StartPlaying()
     {
         if (allCheckpoints.Count > 0)
@@ -114,6 +142,9 @@ public class CheckpointManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Reset passed checkpoints
+    /// </summary>
     public void ResetPassedCheckpoints()
     {
         for (int i = 0; i < allCheckpoints.Count; i++)
@@ -123,6 +154,11 @@ public class CheckpointManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Insert new checkpoint at our checkpoints' list
+    /// </summary>
+    /// <param name="checkpoint">New checkpoint's info</param>
+    /// <param name="index">New cheackpoint's index</param>
     private void InsertCheckpointAt(Checkpoint checkpoint, int index)
     {
         checkpoint.checkpointNumber = index;
@@ -130,6 +166,9 @@ public class CheckpointManager : MonoBehaviour
         selectedObjectManager.DeselectObject();
     }
 
+    /// <summary>
+    /// The event which happens when the last checkpoint is passsed by player
+    /// </summary>
     private void OnFinish()
     {
         if (ringRoad)

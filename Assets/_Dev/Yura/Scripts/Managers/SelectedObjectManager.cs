@@ -1,9 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using Zenject;
 
+/// <summary>
+/// Objects' select manager
+/// </summary>
 public class SelectedObjectManager : MonoBehaviour
 {
     public GameObject selectedObject;
@@ -31,6 +32,10 @@ public class SelectedObjectManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Select specific player
+    /// </summary>
+    /// <param name="player">Specific player</param>
     public void SelectPlayer(GameObject player)
     {
         if (selectedObject == null)
@@ -48,6 +53,10 @@ public class SelectedObjectManager : MonoBehaviour
         checkpointEditorHandler.gameObject.SetActive(false);
     }
 
+    /// <summary>
+    /// Select specific checkpoint
+    /// </summary>
+    /// <param name="checkpoint">Specific checkpoint</param>
     public void SelectCheckpoint(GameObject checkpoint)
     {
         if (selectedObject == null)
@@ -66,6 +75,9 @@ public class SelectedObjectManager : MonoBehaviour
         checkpointEditorHandler.SetSelectedCheckpoint(checkpoint.GetComponent<Checkpoint>().checkpointNumber);
     }
 
+    /// <summary>
+    /// Deselect current object
+    /// </summary>
     public void DeselectObject()
     {
         if (selectedObject != null)

@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using Zenject;
 
@@ -20,6 +17,10 @@ public class Checkpoint : MonoBehaviour
         isPassed = false;
     }
 
+    /// <summary>
+    /// Try to check if the player is entering this checkpoint
+    /// </summary>
+    /// <param name="player"></param>
     public void OnTriggerEnter(Collider player)
     {
         if (player.gameObject.tag == "Player" && !isPassed)
@@ -28,16 +29,25 @@ public class Checkpoint : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Set the state of checkpoint to passed
+    /// </summary>
     public void CheckpointPassed()
     {
         isPassed = true;
     }
 
+    /// <summary>
+    /// Reset the state of checkpoint to not passed
+    /// </summary>
     public void ResetPassed()
     {
         isPassed = false;
     }
 
+    /// <summary>
+    /// Delete this checkpoint
+    /// </summary>
     public void Delete()
     {
         Destroy(this.gameObject);

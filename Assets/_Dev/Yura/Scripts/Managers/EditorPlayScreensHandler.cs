@@ -1,6 +1,9 @@
 using UnityEngine;
 using Zenject;
 
+/// <summary>
+/// Switcher between editor and play
+/// </summary>
 public class EditorPlayScreensHandler : MonoBehaviour
 {
     [Inject] private EditorHandler editor;
@@ -12,6 +15,9 @@ public class EditorPlayScreensHandler : MonoBehaviour
         SwitchToEditor();
     }
 
+    /// <summary>
+    /// Switch to editor
+    /// </summary>
     public void SwitchToEditor()
     {
         checkpointManager.ResetPassedCheckpoints();
@@ -19,6 +25,9 @@ public class EditorPlayScreensHandler : MonoBehaviour
         editor.Activate();
     }
 
+    /// <summary>
+    /// Switch to play
+    /// </summary>
     public void SwitchToPlay()
     {
         checkpointManager.ResetPassedCheckpoints();
@@ -27,6 +36,9 @@ public class EditorPlayScreensHandler : MonoBehaviour
         playerManager.currentPlayer.GetComponent<CarHandler>().Activate();
     }
 
+    /// <summary>
+    /// Restart play
+    /// </summary>
     public void RestartPlay()
     {
         checkpointManager.ResetPassedCheckpoints();

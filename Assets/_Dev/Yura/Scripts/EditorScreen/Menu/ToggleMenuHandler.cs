@@ -1,8 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Toggler for menus in editor
+/// </summary>
 public class ToggleMenuHandler : MonoBehaviour
 {
     public Toggle toggleButton;
@@ -24,6 +25,9 @@ public class ToggleMenuHandler : MonoBehaviour
         ToggleMenu();
     }
 
+    /// <summary>
+    /// The event for toggling all menu's subobjects
+    /// </summary>
     public void ToggleMenu()
     {
         save.SetActive(toggleButton.isOn);
@@ -44,18 +48,27 @@ public class ToggleMenuHandler : MonoBehaviour
         loadButton.CloseUI();
     }
 
+    /// <summary>
+    /// The event on click Save
+    /// </summary>
     public void OnClickSave()
     {
         loadButton.CloseUI();
         saveButton.OnClickSave();
     }
 
+    /// <summary>
+    /// The event on click Load
+    /// </summary>
     public void OnClickLoad()
     {
         saveButton.CloseUI();
         loadButton.OnClickLoad();
     }
 
+    /// <summary>
+    /// The event on click Reset
+    /// </summary>
     public void OnClickReset()
     {
         saveButton.CloseUI();

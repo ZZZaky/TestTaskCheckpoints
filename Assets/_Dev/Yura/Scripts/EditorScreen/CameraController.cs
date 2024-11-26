@@ -1,7 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Handler for editor's camera
+/// </summary>
 public class CameraController : MonoBehaviour
 {
     public Transform cameraTransform;

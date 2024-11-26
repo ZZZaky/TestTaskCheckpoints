@@ -1,8 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
+/// <summary>
+/// Load map in editor
+/// </summary>
 public class LoadMap : MonoBehaviour
 {
     public GameObject loadUI;
@@ -17,6 +18,9 @@ public class LoadMap : MonoBehaviour
         loadUI.SetActive(isOn);
     }
 
+    /// <summary>
+    /// The event which happens on Click
+    /// </summary>
     public void OnClickLoad()
     {
         Time.timeScale = Time.timeScale == 1f ? 0f : 1f;
@@ -25,6 +29,9 @@ public class LoadMap : MonoBehaviour
         if (isOn) { LoadAllMaps(); }
     }
 
+    /// <summary>
+    /// Close Load UI
+    /// </summary>
     public void CloseUI()
     {
         Time.timeScale = 1f;
@@ -32,6 +39,9 @@ public class LoadMap : MonoBehaviour
         loadUI.SetActive(isOn);
     }
 
+    /// <summary>
+    /// Load all maps for Load UI
+    /// </summary>
     private void LoadAllMaps()
     {
         loadMapShowcase.DeleteMapsShowcase();
